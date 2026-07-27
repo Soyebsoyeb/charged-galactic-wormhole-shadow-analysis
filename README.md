@@ -198,21 +198,24 @@ V_{\text{eff}}(r) = \frac{-\det(g_{tt}, g_{\phi\phi}, g_{t\phi})}{g_{\phi\phi}\l
 
 via `scipy.optimize.minimize_scalar` on $-V_{\text{eff}}(r)$.
 
+
 ### 1.7 Plasma Environment
 
-`src/plasma.py` (`PlasmaProfile`) supplies a plasma frequency squared function $\omega_p^2(r,\theta)$
-used to modify photon propagation, selectable by `profile_type`:
+`src/plasma.py` (`PlasmaProfile`) supplies a plasma frequency squared function
+$\omega_p^2(r,\theta)$ used to modify photon propagation, selectable by
+`profile_type`:
 
 | `profile_type` | $\omega_p^2(r,\theta)$ |
-|:---|:---|
-| `homogeneous`  | constant `density_param` |
-| `longitudinal` | $\text{density\_param} \cdot (1 + 2\sin^2\theta)$ |
-| `radial`       | $\text{density\_param} / r^{3/2}$ |
-| `spherical`    | $\text{density\_param} / r^2$ |
-| other          | $0.0$ |
+|:--|:--|
+| `homogeneous` | constant `density_param` |
+| `longitudinal` | `density_param` $\cdot (1 + 2\sin^2\theta)$ |
+| `radial` | `density_param` $/\, r^{3/2}$ |
+| `spherical` | `density_param` $/\, r^2$ |
+| other | $0.0$ |
 
-Only the `homogeneous` case is treated specially by the shadow classes below (through an explicit
-`profile_type == 'homogeneous'` check); the other profiles feed only into the geodesic Hamiltonian.
+Only the `homogeneous` case is treated specially by the shadow classes below
+(through an explicit `profile_type == 'homogeneous'` check); the other
+profiles feed only into the geodesic Hamiltonian.
 
 ### 1.8 Photon Sphere and Shadow Construction
 
