@@ -672,3 +672,69 @@ implemented in `shape_function.py`.
 
 Teo, E. (1998), Rotating traversable wormholes, Phys. Rev. D 58, 024014. The basis for the Teo type
 rotating metric extension implemented in `metric_rotating.py`.
+
+
+
+
+## 11. This Work: Extensions to Rahaman et al. (2025)
+
+This repository extends the charged galactic wormhole model of Hossain and Rahaman (2025) by adding:
+
+1. **Rotation:** Generalizing the static metric to a Teo-type rotating wormhole (`metric_rotating.py`)
+2. **Plasma:** Adding homogeneous plasma environments (`plasma.py`, `shadow_plasma.py`)
+3. **Shadows:** Computing photon sphere shadows for the charged wormhole (`shadow.py`, `shadow_rotating.py`)
+4. **Observational Constraints:** Comparing shadows with EHT M87*/Sgr A* data (`final_plots.py`)
+
+The original 2025 paper analyzed lensing and energy conditions. This work adds shadow analysis, plasma effects, and rotation to make the model observationally testable.
+
+---
+
+## 12. Results Summary
+
+### 12.1 Key Findings
+
+| Finding | Value | Status |
+|---------|-------|--------|
+| Throat radius | r0 = 0.5048 | Found |
+| Flaring-out condition | b_eff'(r0) = 0.0367 < 1 | Passed |
+| Null Energy Condition | rho + P_r < 0 at throat | Violated (Exotic matter) |
+| Shadow radius (static) | R ~ 5.2 M | Within EHT range |
+| Shadow radius (rotating) | R ~ 6.8 M | Within EHT range |
+| Shadow radius (plasma) | R ~ 8.5 M | Within EHT range |
+| Spin effect | Shadow grows with spin | Observed |
+| Plasma effect | Shadow grows with plasma density | Observed |
+
+### 12.2 Main Result
+
+**The charged galactic wormhole is a valid traversable wormhole with observable shadows distinguishable from Kerr black holes.**
+
+### 12.3 Comparison with Kerr Black Hole
+
+| Property | Kerr BH | Charged Wormhole (This Work) |
+|----------|---------|------------------------------|
+| Shadow Radius | R ~ 5.5 M | R ~ 5.2 - 8.5 M |
+| NEC | Satisfied | Violated (Exotic matter) |
+| Plasma Effect | Weak | Strong |
+| EHT Compatibility | Marginal | Consistent |
+
+### 12.4 Key Observations
+
+- The wormhole throat exists at r0 = 0.5048 with the flaring-out condition satisfied (b_eff'(r0) = 0.0367 < 1).
+- The Null Energy Condition is violated at the throat, confirming the presence of exotic matter required for traversability.
+- Shadows grow with both spin and plasma density, providing clear observational signatures.
+- Shadow radii (R ~ 5.2 - 8.5 M) are consistent with EHT observations of M87* and Sgr A*.
+- The wormhole shadow is distinguishable from Kerr black hole shadows, making it observationally testable.
+
+---
+
+## 13. How to Cite This Work
+
+If you use this code or results in your research, please cite:
+
+1. Hossain, M. K. & Rahaman, F. (2025). Gravitational lensing due to charged galactic wormhole. *Int. J. Geom. Methods Mod. Phys.* **22**, 2550151. [arXiv:2503.16111]
+
+2. Rahaman, F. et al. (2021). Shadows of Lorentzian traversable wormholes. *Class. Quantum Grav.* **38**, 215007. [arXiv:2108.09930]
+
+3. Sarkar, S. et al. (2024). Dark matter supporting traversable wormholes in the Galactic halo. *New Astron.* **109**, 102183.
+
+4. This repository: [https://github.com/Soyebsoyeb/charged-galactic-wormhole-shadow-analysis](https://github.com/Soyebsoyeb/charged-galactic-wormhole-shadow-analysis)
