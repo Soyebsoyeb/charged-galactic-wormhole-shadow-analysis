@@ -206,11 +206,11 @@ $\omega_p^2(r,\theta)$ used to modify photon propagation, selectable by
 `profile_type`:
 
 | `profile_type` | $\omega_p^2(r,\theta)$ |
-|:--|:--|
+|:---|:---|
 | `homogeneous` | constant `density_param` |
-| `longitudinal` | `density_param` $\cdot (1 + 2\sin^2\theta)$ |
-| `radial` | `density_param` $/\, r^{3/2}$ |
-| `spherical` | `density_param` $/\, r^2$ |
+| `longitudinal` | $\mathrm{density\_param} \cdot (1 + 2\sin^2\theta)$ |
+| `radial` | $\mathrm{density\_param} /\, r^{3/2}$ |
+| `spherical` | $\mathrm{density\_param} /\, r^2$ |
 | other | $0.0$ |
 
 Only the `homogeneous` case is treated specially by the shadow classes below
