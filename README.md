@@ -204,11 +204,11 @@ via `scipy.optimize.minimize_scalar` on $-V_{\text{eff}}(r)$.
 used to modify photon propagation, selectable by `profile_type`:
 
 | `profile_type` | $\omega_p^2(r,\theta)$ |
-|---|---|
+|:---|:---|
 | `homogeneous`  | constant `density_param` |
 | `longitudinal` | $\text{density\_param} \cdot (1 + 2\sin^2\theta)$ |
-| `radial`       | $\text{density\_param} \, / \, r^{3/2}$ |
-| `spherical`    | $\text{density\_param} \, / \, r^2$ |
+| `radial`       | $\text{density\_param} \,/\, r^{3/2}$ |
+| `spherical`    | $\text{density\_param} \,/\, r^2$ |
 | other          | $0.0$ |
 
 Only the `homogeneous` case is treated specially by the shadow classes below (through an explicit
