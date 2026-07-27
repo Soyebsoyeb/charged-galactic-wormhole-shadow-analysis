@@ -47,9 +47,9 @@ The wormhole is embedded in a galactic dark matter halo whose energy density is 
 implemented in `src/dark_matter.py`, as an exponentially decaying profile (Eq. 9 of the reference
 paper):
 
-$$
+```math
 \rho_w(r) = \rho_s \, e^{-r/r_s}
-$$
+```
 
 where $\rho_s$ is a central density scale and $r_s$ is the halo scale radius. This profile is
 physically motivated by the reference `Sofue2013` (Milky Way rotation curve), which anchors the
@@ -61,36 +61,36 @@ The wormhole geometry is a Morris-Thorne type traversable wormhole (`MorrisThorn
 to include an electric charge $Q$. The line element implemented in `src/metric.py`
 (`ChargedWormholeMetric`) is (Eq. 3):
 
-$$
+```math
 ds^2 = -\left(1 + \frac{Q^2}{r^2}\right) dt^2
 + \left(1 - \frac{b(r)}{r} + \frac{Q^2}{r^2}\right)^{-1} dr^2
 + r^2\left(d\theta^2 + \sin^2\theta \, d\phi^2\right)
-$$
+```
 
 so that
 
-$$
+```math
 g_{tt}(r) = -\left(1 + \frac{Q^2}{r^2}\right), \qquad
 g_{rr}(r) = \left[1 - \frac{b(r)}{r} + \frac{Q^2}{r^2}\right]^{-1}, \qquad
 g_{\theta\theta}(r) = r^2, \qquad
 g_{\phi\phi}(r,\theta) = r^2 \sin^2\theta
-$$
+```
 
 The diagonal inverse metric components (`inverse_metric`) are simply the reciprocals of these terms.
 
 The shape function $b(r)$ sourced by the dark matter halo density is given in closed form
 (`src/shape_function.py`, Eq. 11):
 
-$$
+```math
 b(r) = -8 r_s \left(r^2 + 2 r r_s + 2 r_s^2\right) e^{-r/r_s} \, \pi \rho_s + C_1
-$$
+```
 
 with $C_1$ an integration constant (`config/params.yaml: wormhole.C1`). The charge modifies this
 into an effective shape function (Eq. 12):
 
-$$
+```math
 b_{\text{eff}}(r) = b(r) - \frac{Q^2}{r}
-$$
+```
 
 which enters $g_{rr}$ above. `ShapeFunction` supports both a NumPy evaluated form (`b`, used for
 plotting and root finding) and a SymPy symbolic form (`b_symbolic`, `b_eff_symbolic`), the latter
@@ -103,15 +103,15 @@ implemented in closed form (numeric only; they raise if passed a symbolic input)
 (`scipy.optimize.root_scalar`, bracketed search in `[r_min, r_max]`, default `[0.1, 10.0]`) of the
 standard throat condition
 
-$$
+```math
 b_{\text{eff}}(r_0) = r_0
-$$
+```
 
 `ShapeFunction.check_flaring_out(r)` evaluates the Morris-Thorne flare out condition
 
-$$
+```math
 b_{\text{eff}}'(r) < 1
-$$
+```
 
 which must hold at the throat for the geometry to represent a traversable wormhole rather than a
 horizon.
@@ -123,17 +123,17 @@ the Einstein equations for this metric (Eqs. 4 to 8), given a `ShapeFunction` in
 
 Total energy density (Eq. 4):
 
-$$
+```math
 \rho(r) = \frac{1}{8\pi}\left(\frac{b'(r)}{r^2} + \frac{Q^2}{r^4}\right)
-$$
+```
 
 Dark matter energy density $\rho^{(0)}(r)$: forwarded from `ShapeFunction.dm.density(r)` (Eq. 9/10).
 
 Electromagnetic energy density (Eq. 8):
 
-$$
+```math
 \rho^{(1)}(r) = \frac{Q^2}{8\pi r^4}
-$$
+```
 
 A radial-pressure related quantity $\tau(r)$ (Eq. 5), from which the radial pressure is
 $P_r(r) = -\tau(r)$, and a tangential pressure $P_t(r) = P(r)$ (Eq. 6), a longer expression
@@ -152,21 +152,21 @@ rotation (`Teo1998`), parametrized by a spin parameter $a$:
 $g_{tt}$, $g_{rr}$, $g_{\theta\theta}$ are unchanged from the static metric. The frame dragging
 angular velocity is
 
-$$
+```math
 \omega(r) = \frac{2a}{r^3}
-$$
+```
 
 the off diagonal term is
 
-$$
+```math
 g_{t\phi}(r,\theta) = -\omega(r) \, r^2 \sin^2\theta
-$$
+```
 
 and the rotated azimuthal term is
 
-$$
+```math
 g_{\phi\phi}(r,\theta) = r^2 \sin^2\theta \left[1 + \omega(r)^2 r^2 \sin^2\theta\right]
-$$
+```
 
 The inverse metric is computed from the $2\times 2$ block determinant
 $\det = g_{tt} g_{\phi\phi} - g_{t\phi}^2$ of the $(t,\phi)$ sector, combined with the unchanged
@@ -177,9 +177,9 @@ diagonal $g_{rr}$, $g_{\theta\theta}$ inverses.
 `src/geodesics.py` (`NullGeodesic`) and `src/geodesics_rotating.py` (`RotatingNullGeodesic`)
 implement a Hamiltonian formulation of null geodesic motion,
 
-$$
+```math
 H = \tfrac{1}{2} g^{\mu\nu} p_\mu p_\nu
-$$
+```
 
 with an added refractive term $\omega_p^2(r,\theta)$ from the plasma profile in the rotating case.
 The coordinate equations of motion $dx^\mu/ds = \partial H/\partial p_\mu = g^{\mu\nu} p_\nu$ are
@@ -192,9 +192,9 @@ solver advances only the coordinates for a given, unevolving set of conserved mo
 `RotatingNullGeodesic.find_photon_sphere()` locates the equatorial photon sphere radius by
 maximizing an effective potential
 
-$$
+```math
 V_{\text{eff}}(r) = \frac{-\det(g_{tt}, g_{\phi\phi}, g_{t\phi})}{g_{\phi\phi}\left[1 - \omega_p^2(r)\right]}
-$$
+```
 
 via `scipy.optimize.minimize_scalar` on $-V_{\text{eff}}(r)$.
 
@@ -224,9 +224,9 @@ metric.
 
 In all three, the photon sphere radius $r_{ph}$ is found by maximizing an effective potential
 
-$$
+```math
 V_{\text{eff}}(r) = \frac{-g_{tt}(r)\left(1 - \omega_p^2\right)}{g_{rr}(r)}
-$$
+```
 
 in the static case, or the rotating analogue described in Section 1.6, via
 `scipy.optimize.minimize_scalar`.
@@ -245,10 +245,10 @@ zero at every sample, so the $\beta^2 > 0$ selection never accepts a point for t
 rotating class's own `shadow_boundary` (`RotatingWormholeShadow`) instead uses a Bardeen style
 parametrization,
 
-$$
+```math
 \alpha = -\frac{\eta}{\sin\theta_o}, \qquad
 \beta^2 = \xi - (\eta - a)^2 + a^2\cos^2\theta_o - \eta^2 \cot^2\theta_o
-$$
+```
 
 with $\eta = -a + \sqrt{\xi}$ for $\xi > 0$ (else $\eta = -a$), and this formula is what actually
 populates the boundary curves and the parameter space scan described in Section 4.
@@ -461,17 +461,17 @@ The notebook loads `config/params.yaml` and instantiates `DarkMatterProfile`, `S
 `ChargedWormholeMetric` exactly as `run_analysis.py` does. It then re-derives the shape function
 symbolically with SymPy, `r, theta = sp.symbols(...)`,
 
-$$
+```math
 b_{\text{sym}}(r) = -8 r_s\left(r^2 + 2rr_s + 2r_s^2\right)e^{-r/r_s}\pi\rho_s + C_1
-$$
+```
 
 and prints the corresponding symbolic $g_{tt}$ and $g_{rr}$ expressions (Eq. 3) with the configured
 numeric parameters substituted in. The cached output cell shows, for the parameters active in
 `config/params.yaml` at the time the notebook was last executed,
 
-$$
+```math
 g_{tt} = -1 - \frac{0.01}{r^2}
-$$
+```
 
 and a $g_{rr}$ expression built from the same $b_{\text{sym}}$ formula; this is included as a
 worked symbolic check of the closed form metric components rather than as a numerical output
@@ -537,13 +537,13 @@ not generated by any cell shown in the notebook as provided.
 `TestMetric` (pytest) constructs a `ShapeFunction`/`ChargedWormholeMetric` pair with
 $\rho_s = 0.05$, $r_s = 1.0$, $C_1 = 0.0$, $Q = 0.1$, and checks, at $r = 2.0$:
 
-$$
+```math
 g_{tt}(r) = -\left(1 + \frac{Q^2}{r^2}\right) \quad (\texttt{test\_g\_tt})
-$$
+```
 
-$$
+```math
 g_{rr}(r) = \left[1 - \frac{b(r)}{r} + \frac{Q^2}{r^2}\right]^{-1} \quad (\texttt{test\_g\_rr})
-$$
+```
 
 and that `metric_tensor(r, theta=pi/4)` contains all four expected keys, with
 $g_{\theta\theta} = r^2$ and $g_{\phi\phi} = r^2\sin^2\theta$ (`test_metric_tensor`).
