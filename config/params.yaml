@@ -2,17 +2,17 @@
 
 # Dark Matter Profile - Eq. (9) & (10)
 dark_matter:
-  rho_s: 0.05          # Central density ρ_s
+  rho_s: 0.01          # Central density (working value)
   r_s: 1.0             # Scale radius r_s
 
 # Wormhole Parameters
 wormhole:
-  Q: 0.1               # Electric charge Q
-  C1: 0.0              # Integration constant C1 from Eq. (11)
+  Q: 0.0               # Electric charge Q
+  C1: 1.0              # Integration constant (working value)
 
 # Analysis Parameters
 analysis:
-  r_min: 1.0
+  r_min: 0.5
   r_max: 10.0
   n_points: 1000
   r_throat: 1.0
