@@ -198,18 +198,21 @@ V_{\text{eff}}(r) = \frac{-\det(g_{tt}, g_{\phi\phi}, g_{t\phi})}{g_{\phi\phi}\l
 
 via `scipy.optimize.minimize_scalar` on $-V_{\text{eff}}(r)$.
 
-1.7 Plasma Environment
-src/plasma.py (PlasmaProfile) supplies a plasma frequency squared function $\omega_p^2(r,\theta)$ used to modify photon propagation, selectable by profile_type:
+### 1.7 Plasma Environment
 
-| profile_type   | $\omega_p^2(r,\theta)$                              |
-|----------------|-----------------------------------------------------|
-| homogeneous    | $\text{constant density\_param}$                    |
-| longitudinal   | $\text{density\_param} \cdot (1 + 2\sin^2\theta)$   |
-| radial         | $\text{density\_param} \, / \, r^{3/2}$             |
-| spherical      | $\text{density\_param} \, / \, r^2$                 |
-| other          | $0.0$                                               |
+`src/plasma.py` (`PlasmaProfile`) supplies a plasma frequency squared function $\omega_p^2(r,\theta)$
+used to modify photon propagation, selectable by `profile_type`:
 
-Only the homogeneous case is treated specially by the shadow classes below (through an explicit profile_type == 'homogeneous' check); the other profiles feed only into the geodesic Hamiltonian.
+| `profile_type` | $\omega_p^2(r,\theta)$ |
+|:---|:---|
+| `homogeneous`  | constant `density_param` |
+| `longitudinal` | $\text{density\_param} \cdot (1 + 2\sin^2\theta)$ |
+| `radial`       | $\text{density\_param} / r^{3/2}$ |
+| `spherical`    | $\text{density\_param} / r^2$ |
+| other          | $0.0$ |
+
+Only the `homogeneous` case is treated specially by the shadow classes below (through an explicit
+`profile_type == 'homogeneous'` check); the other profiles feed only into the geodesic Hamiltonian.
 
 ### 1.8 Photon Sphere and Shadow Construction
 
