@@ -1,0 +1,18 @@
+# Parameters from Rahaman et al. (2025), arXiv:2503.16111
+
+# Dark Matter Profile - Eq. (9) & (10)
+dark_matter:
+  rho_s: 0.05          # Central density ρ_s
+  r_s: 1.0             # Scale radius r_s
+
+# Wormhole Parameters
+wormhole:
+  Q: 0.1               # Electric charge Q
+  C1: 0.0              # Integration constant C1 from Eq. (11)
+
+# Analysis Parameters
+analysis:
+  r_min: 1.0
+  r_max: 10.0
+  n_points: 1000
+  r_throat: 1.0
